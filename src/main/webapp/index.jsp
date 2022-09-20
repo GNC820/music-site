@@ -1,10 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : Sep 20, 2022, 11:40:36 AM
-    Author     : z003z1ky
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +6,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Welcome to  Music Store!</h1>
+            <a href="login.jsp">Login</a>
+            <a href="register.jsp">Registration</a>
+
+  
     </body>
 </html>

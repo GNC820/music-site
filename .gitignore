@@ -29,6 +29,9 @@ replay_pid*
 
 ### Maven ###
 target/
+.project
+.settings/
+target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -57,3 +60,4 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,netbeans,maven
+target/maven-archiver/pom.properties
