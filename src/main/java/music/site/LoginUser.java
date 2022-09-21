@@ -26,14 +26,14 @@ public class LoginUser extends HttpServlet {
 
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
             User user = userDao.login(username, password);
-           
+            System.out.println("avem user"+ user);
             HttpSession session = null;
             if (user != null) {
-                 System.out.println("avem user"+ user.toString());
+                 System.out.println("avem user"+ user.getIsAdmin());
                 session = request.getSession();
                 session.setAttribute("username", username);
-
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                session.setAttribute("isAdmin", user.getIsAdmin());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
                 dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");

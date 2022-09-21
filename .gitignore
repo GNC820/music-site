@@ -61,3 +61,4 @@ nbdist/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,netbeans,maven
 target/maven-archiver/pom.properties
+*.properties

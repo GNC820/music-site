@@ -4,10 +4,6 @@ package music.site;
 import DAO.UserDao;
 import connection.ConnectionManager;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,9 +25,8 @@ public class RegisterUser extends HttpServlet {
             User user = new User(username, password, isAdmin, email);
 
             boolean status = false;
- System.out.println(ConnectionManager.getConnection());
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
-            System.out.println(userDao);
+
             status = userDao.saveUser(user);
             if (status) {
                 request.setAttribute("status", "Successful");
