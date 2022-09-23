@@ -28,6 +28,18 @@
         <servlet-name>DeleteUser</servlet-name>
         <servlet-class>music.site.DeleteUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchSong</servlet-name>
+        <servlet-class>music.site.SearchSong</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllSongs</servlet-name>
+        <servlet-class>music.site.ViewAllSongs</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderHistory</servlet-name>
+        <servlet-class>OrderHistory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
         <url-pattern>/RegisterUser</url-pattern>
@@ -51,6 +63,18 @@
     <servlet-mapping>
         <servlet-name>DeleteUser</servlet-name>
         <url-pattern>/DeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchSong</servlet-name>
+        <url-pattern>/SearchSong</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllSongs</servlet-name>
+        <url-pattern>/ViewAllSongs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderHistory</servlet-name>
+        <url-pattern>/OrderHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

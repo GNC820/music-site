@@ -112,6 +112,35 @@ public class SongDao {
         return rowUpdated;
     }
 
+    public List<Song> search(String inputString) {
+        String query = "select * from song WHERE title LIKE CONCAT( '%',?,'%') or artist LIKE CONCAT( '%',?,'%')";
+        List<Song> songs = new ArrayList<Song>();
+        try {
+            PreparedStatement preparedStatement = this.con.prepareStatement(query);
+            preparedStatement.setString(1,inputString);
+            preparedStatement.setString(2, inputString);
+        
+            ResultSet rs = preparedStatement.executeQuery();
+            
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                String title = rs.getString("title");
+                String artist = rs.getString("artist");
+                String price = rs.getString("price");
+                String description = rs.getString("description");
+                Integer salesAmount = rs.getInt("salesAmount");
+
+                songs.add(new Song(id, title, artist, price, description, salesAmount));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return songs;
+    }
+
     public ResultSet checkTitle(String title) {
         String query = "select * from song where title = ?";
         PreparedStatement ps;
