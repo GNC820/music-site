@@ -83,4 +83,60 @@ public class UserDao {
 
         return users;
     }
+
+    public User getUserById(int id) {
+        User user = null;
+        String query = "select * from user where id = ?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = this.con.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Integer user_id = rs.getInt("id");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String isAdmin = rs.getString("isAdmin");
+                user = new User(user_id, username, email, isAdmin);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return user;
+    }
+
+    public boolean updateUser(User user) throws SQLException {
+        boolean rowUpdated;
+
+        String query = "update user set username = ?,email= ?, isAdmin = ? where id = ?;";
+        PreparedStatement preparedStatement;
+
+        preparedStatement = this.con.prepareStatement(query);
+
+        preparedStatement.setString(1, user.getUsername());
+        preparedStatement.setString(2, user.getEmail());
+        preparedStatement.setString(3, user.getIsAdmin());
+        preparedStatement.setInt(4, user.getId());
+
+        rowUpdated = preparedStatement.executeUpdate() > 0;
+
+        return rowUpdated;
+    }
+
+    public boolean deleteUser(int id) throws SQLException {
+        boolean rowDeleted;
+        String query = "delete from user where id = ?;";
+        PreparedStatement preparedStatement;
+
+        preparedStatement = this.con.prepareStatement(query);
+
+        preparedStatement.setInt(1, id);
+        rowDeleted = preparedStatement.executeUpdate() > 0;
+
+        return rowDeleted;
+    }
+
 }

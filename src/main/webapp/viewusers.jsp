@@ -15,7 +15,7 @@
             <nav class="navbar navbar-expand-md navbar-dark"
                  style="background-color: black">
                 <div>
-                    <a href="https://www.xadmin.net" class="navbar-brand">
+                    <a class="navbar-brand"  style="color: yellow">
                         MHitTastic! - an online music site </a>
                 </div>
             </nav>
@@ -30,6 +30,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                             <th>Id</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>Is Admin</th>
@@ -41,12 +42,15 @@
                     <c:forEach var="user" items="${listUser}">
 
                         <tr>
+                            <td><c:out value="${user.id
+                                   
+                                       }" /></td>
                         <td><c:out value="${user.username}" /></td>
                         <td><c:out value="${user.email}" /></td>
                         <td><c:out value="${user.isAdmin}" /></td>
-                        <td><a href="edit?id=<c:out value='${user.id}' />">Edit</a>
+                        <td><a href="./EditUser?id=<c:out value='${user.id}' />">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="delete?id=<c:out value='${user.id}' />">Delete</a></td>
+                                href="./DeleteUser?id=<c:out value='${user.id}' />">Delete</a></td>
                         </tr>
                     </c:forEach>
 
