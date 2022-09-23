@@ -11,7 +11,7 @@
               crossorigin="anonymous">
     </head>
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: black"> <a class="navbar-brand" style="color: yellow"> HitTastic! - an online music site</a></button>
-    <div class="collapse navbar-collapse" id="navbarColor02">
+    <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active"> <a class="nav-link" href="./ViewAllSongs">Songs</a> </li>
             <li class="nav-item active"> <a class="nav-link" href="./OrderHistory">Order history</a> </li>
@@ -23,7 +23,7 @@
 
 
         <i class="mdi mdi-logout" ></i>
-        <a  class="btn btn-warning" href="../user/login">Logout</a>
+        <a  class="btn btn-warning" href="./Logout">Logout</a>
 
     </div>
 </nav>

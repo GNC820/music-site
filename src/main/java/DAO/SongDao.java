@@ -16,11 +16,9 @@ public class SongDao {
         this.con = con;
     }
 
-    //for register user 
     public boolean saveSong(Song song) {
         boolean set = false;
         try {
-            //Insert register data to database
             String query = "insert into song(title,artist, price, description, salesAmount) values(?,?,?,?,?)";
 
             PreparedStatement pt = this.con.prepareStatement(query);

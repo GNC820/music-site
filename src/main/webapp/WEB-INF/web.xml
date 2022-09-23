@@ -38,7 +38,11 @@
     </servlet>
     <servlet>
         <servlet-name>OrderHistory</servlet-name>
-        <servlet-class>OrderHistory</servlet-class>
+        <servlet-class>music.site.OrderHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>music.site.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>OrderHistory</servlet-name>
         <url-pattern>/OrderHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

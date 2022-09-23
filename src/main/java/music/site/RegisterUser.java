@@ -1,6 +1,5 @@
 package music.site;
 
-
 import DAO.UserDao;
 import connection.ConnectionManager;
 import java.io.IOException;
@@ -26,18 +25,17 @@ public class RegisterUser extends HttpServlet {
 
             boolean status = false;
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
+            status = userDao.saveUser(user);
 
-           
             if (status) {
                 // Step: Redirect to a View
-            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-            dispatcher.forward(request, response);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+                dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-            dispatcher.forward(request, response);
+                dispatcher.forward(request, response);
             }
 
-            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

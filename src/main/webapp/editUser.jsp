@@ -12,18 +12,21 @@
     </head>
     <body>
 
-    <header>
+        <header>
             <nav class="navbar navbar-expand-md navbar-dark"
                  style="background-color: black">
-                <div>
+                <div class="collapse navbar-collapse">
                     <a class="navbar-brand"  style="color: yellow">
-                        MHitTastic! - an online music site </a>
+                        HitTastic! - an online music site </a>
+                    
                 </div>
+                <i class="mdi mdi-logout" ></i>
+                    <a  class="btn btn-warning" href="./Logout">Logout</a>
             </nav>
         </header>
         <br>
-        <div class="container col-md-5">
-            <div class="card">
+        <div class="container col-md-5" >
+            <div class="card" >
                 <div class="card-body">
                     <form action="./UpdateUser" method="post">
 
@@ -36,20 +39,20 @@
 
                         <fieldset class="form-group">
                             <label>Userame</label> <input type="text"
-                                                            value="<c:out value='${user.username}' />" class="form-control"
-                                                            name="username" required="required">
+                                                          value="<c:out value='${user.username}' />" class="form-control"
+                                                          name="username" required="required">
                         </fieldset>
 
                         <fieldset class="form-group">
                             <label>Email</label> <input type="text"
-                                                             value="<c:out value='${user.email}' />" class="form-control"
-                                                             name="email">
+                                                        value="<c:out value='${user.email}' />" class="form-control"
+                                                        name="email">
                         </fieldset>
 
                         <fieldset class="form-group">
                             <label>Is Admin</label> <input type="text"
-                                                               value="<c:out value='${user.isAdmin}' />" class="form-control"
-                                                               name="isAdmin">
+                                                           value="<c:out value='${user.isAdmin}' />" class="form-control"
+                                                           name="isAdmin">
                         </fieldset>
 
                         <button type="submit" class="btn btn-warning">Save</button>

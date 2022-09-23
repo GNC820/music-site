@@ -10,14 +10,17 @@
               crossorigin="anonymous">
     </head>
     <body>
-         <jsp:include page="/ViewAllUsers" />
+        <jsp:include page="/ViewAllUsers" />
         <header>
             <nav class="navbar navbar-expand-md navbar-dark"
                  style="background-color: black">
-                <div>
+                <div class="collapse navbar-collapse">
                     <a class="navbar-brand"  style="color: yellow">
-                        MHitTastic! - an online music site </a>
+                        HitTastic! - an online music site </a>
+                    
                 </div>
+                <i class="mdi mdi-logout" ></i>
+                    <a  class="btn btn-warning" href="./Logout">Logout</a>
             </nav>
         </header>
         <br>
@@ -30,7 +33,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                             <th>Id</th>
+                            <th>Id</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>Is Admin</th>
@@ -39,20 +42,20 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach var="user" items="${listUser}">
+                        <c:forEach var="user" items="${listUser}">
 
-                        <tr>
-                            <td><c:out value="${user.id
-                                   
-                                       }" /></td>
-                        <td><c:out value="${user.username}" /></td>
-                        <td><c:out value="${user.email}" /></td>
-                        <td><c:out value="${user.isAdmin}" /></td>
-                        <td><a href="./EditUser?id=<c:out value='${user.id}' />">Edit</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="./DeleteUser?id=<c:out value='${user.id}' />">Delete</a></td>
-                        </tr>
-                    </c:forEach>
+                            <tr>
+                                <td><c:out value="${user.id
+
+                                           }" /></td>
+                                <td><c:out value="${user.username}" /></td>
+                                <td><c:out value="${user.email}" /></td>
+                                <td><c:out value="${user.isAdmin}" /></td>
+                                <td><a href="./EditUser?id=<c:out value='${user.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a
+                                        href="./DeleteUser?id=<c:out value='${user.id}' />">Delete</a></td>
+                            </tr>
+                        </c:forEach>
 
                     </tbody>
 
