@@ -27,16 +27,17 @@ public class RegisterUser extends HttpServlet {
             boolean status = false;
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
 
-            status = userDao.saveUser(user);
+           
             if (status) {
-                request.setAttribute("status", "Successful");
+                // Step: Redirect to a View
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher.forward(request, response);
             } else {
-                request.setAttribute("status", "Un-Successful");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+            dispatcher.forward(request, response);
             }
 
-            // Step: Redirect to a View
-            RequestDispatcher dispatcher = request.getRequestDispatcher("status.jsp");
-            dispatcher.forward(request, response);
+            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
