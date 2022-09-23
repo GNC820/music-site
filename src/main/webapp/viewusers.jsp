@@ -10,17 +10,19 @@
               crossorigin="anonymous">
     </head>
     <body>
-        <jsp:include page="/ViewAllUsers" />
+
         <header>
             <nav class="navbar navbar-expand-md navbar-dark"
                  style="background-color: black">
                 <div class="collapse navbar-collapse">
                     <a class="navbar-brand"  style="color: yellow">
                         HitTastic! - an online music site </a>
-                    
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active"> <a class="nav-link" href="./ViewAllUsers">Users</a> </li>
+                    </ul>
                 </div>
                 <i class="mdi mdi-logout" ></i>
-                    <a  class="btn btn-warning" href="./Logout">Logout</a>
+                <a  class="btn btn-warning" href="./Logout">Logout</a>
             </nav>
         </header>
         <br>
@@ -51,9 +53,9 @@
                                 <td><c:out value="${user.username}" /></td>
                                 <td><c:out value="${user.email}" /></td>
                                 <td><c:out value="${user.isAdmin}" /></td>
-                                <td><a href="./EditUser?id=<c:out value='${user.id}' />">Edit</a>
-                                    &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                        href="./DeleteUser?id=<c:out value='${user.id}' />">Delete</a></td>
+                                <td><a class="btn btn-warning"  href="./EditUser?id=<c:out value='${user.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a  class="btn btn-warning" 
+                                                                 href="./DeleteUser?id=<c:out value='${user.id}' />">Delete</a></td>
                             </tr>
                         </c:forEach>
 

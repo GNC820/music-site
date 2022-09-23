@@ -9,6 +9,7 @@ import connection.ConnectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,13 +29,15 @@ public class UpdateUser extends HttpServlet {
             String isAdmin = request.getParameter("isAdmin");
             String email = request.getParameter("email");
 
-            User user = new User(id, username, email, isAdmin );
+            User user = new User(id, username, email, isAdmin);
 
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
 
             boolean isRowUpdated = userDao.updateUser(user);
 
             if (isRowUpdated) {
+                List<User> listUser = userDao.selectAllUsers();
+                request.setAttribute("listUser", listUser);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
                 dispatcher.forward(request, response);
             }

@@ -18,10 +18,13 @@
                 <div class="collapse navbar-collapse">
                     <a class="navbar-brand"  style="color: yellow">
                         HitTastic! - an online music site </a>
-                    
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active"> <a class="nav-link" href="./ViewAllUsers">Users</a> </li>
+                    </ul>
+
                 </div>
                 <i class="mdi mdi-logout" ></i>
-                    <a  class="btn btn-warning" href="./Logout">Logout</a>
+                <a  class="btn btn-warning" href="./Logout">Logout</a>
             </nav>
         </header>
         <br>

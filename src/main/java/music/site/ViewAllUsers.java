@@ -20,8 +20,8 @@ public class ViewAllUsers extends HttpServlet {
         
         List<User> listUser = userDao.selectAllUsers();
         request.setAttribute("listUser", listUser);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
-//        dispatcher.forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
+        dispatcher.forward(request, response);
 
     }
 

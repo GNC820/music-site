@@ -28,20 +28,24 @@ public class LoginUser extends HttpServlet {
             User user = userDao.login(username, password);
 
             HttpSession session = null;
-            if (user != null && user.getIsAdmin().equals("Yes")) {;
+            if (user != null && user.getIsAdmin().equals("Yes")) {
                 session = request.getSession();
                 session.setAttribute("username", username);
                 session.setAttribute("isAdmin", user.getIsAdmin());
+
+                List<User> listUser = userDao.selectAllUsers();
+                request.setAttribute("listUser", listUser);
+
                 RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
                 dispatcher.forward(request, response);
             } else if (user != null && user.getIsAdmin().equals("No")) {
                 SongDao songDao = new SongDao(ConnectionManager.getConnection());
-                
+
                 List<Song> songs = new ArrayList<Song>() {
                     {
                         add(new Song("Out of Time", "The Weeknd", "£22 ", "A respite from the fast-paced front half of the Weeknd’s Dawn FM, “Out of Time” slows things down and looks inward, inspired by Japanese city pop from the early Eighties and sampling Tomoko Aran’s “Midnight Pretenders.”", 0));
                         add(new Song("Vegas", "Doja Cat", "£28", "Leiber and Stoller wrote it, Big Mama Thornton sang it, Elvis covered it — and who better than Doja Cat to rewrite the whole tangled history of American pop music by remaking “Hound Dog” in her own uproariously raw style?", 0));
-                         add(new Song("Vegas 2", "Doja Cat", "£28", "Leiber and Stoller wrote it, Big Mama Thornton sang it, Elvis covered it — and who better than Doja Cat to rewrite the whole tangled history of American pop music by remaking “Hound Dog” in her own uproariously raw style?", 0));
+                        add(new Song("Vegas 2", "Doja Cat", "£28", "Leiber and Stoller wrote it, Big Mama Thornton sang it, Elvis covered it — and who better than Doja Cat to rewrite the whole tangled history of American pop music by remaking “Hound Dog” in her own uproariously raw style?", 0));
                         add(new Song("About Damn Time", "Lizzo", "£15", "“It’s bad bitch o’clock,” Lizzo declares on the first single since her 2019 major-label debut, Cuz I Love You, turned the Minneapolis singer, rapper, and occasional flautist into a pop sensation.", 0));
                         add(new Song("Cursed", "King Princess", "£33", "With lines like “Did you stop smoking weed/Or trying to please your dad?” the latest King Princess single is a cheeky pop gem — the kind that can shine long after you’ve exhausted your “play” button.Dog for one messy web of Nineties.", 0));
                     }
@@ -49,9 +53,9 @@ public class LoginUser extends HttpServlet {
                 for (Song song : songs) {
                     songDao.saveSong(song);
                 }
-                
+
                 List<Song> allSongs = songDao.selectAllSongs();
-                
+
                 RequestDispatcher dispatcher = request.getRequestDispatcher("songs.jsp");
                 request.setAttribute("allSongs", allSongs);
                 dispatcher.forward(request, response);
