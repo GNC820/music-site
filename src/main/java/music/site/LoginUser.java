@@ -28,10 +28,12 @@ public class LoginUser extends HttpServlet {
             User user = userDao.login(username, password);
 
             HttpSession session = null;
+            session = request.getSession();
+            session.setAttribute("username", username);
+            session.setAttribute("isAdmin", user.getIsAdmin());
+            session.setAttribute("userId", user.getId());
+
             if (user != null && user.getIsAdmin().equals("Yes")) {
-                session = request.getSession();
-                session.setAttribute("username", username);
-                session.setAttribute("isAdmin", user.getIsAdmin());
 
                 List<User> listUser = userDao.selectAllUsers();
                 request.setAttribute("listUser", listUser);
@@ -58,6 +60,9 @@ public class LoginUser extends HttpServlet {
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("songs.jsp");
                 request.setAttribute("allSongs", allSongs);
+                dispatcher.forward(request, response);
+            } else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
             }
 

@@ -4,6 +4,7 @@ import DAO.UserDao;
 import connection.ConnectionManager;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 public class DeleteUser extends HttpServlet {
 
@@ -22,8 +24,11 @@ public class DeleteUser extends HttpServlet {
         try {
             boolean rowDeleted = userDao.deleteUser(id);
             if (rowDeleted) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
-                dispatcher.forward(request, response);
+                List<User> listUser = userDao.selectAllUsers();
+                request.setAttribute("listUser", listUser);
+//                RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
+//                dispatcher.forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/ViewAllUsers");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DeleteUser.class.getName()).log(Level.SEVERE, null, ex);

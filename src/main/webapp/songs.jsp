@@ -39,38 +39,53 @@
             <div class="row">
                 <c:forEach var="event" items="${allSongs}">
                     <div class="col-4 col-sm-3">
-                        <br>
-                        <div class="card"  style="width: 15rem; margin-bottom: 20px" >
-                            <img class="card-img-top img-fluid"
-                                 src="./img/music-sign.jpg"  alt=""
-                                 style="width: 30%;
-                                 margin: 0 auto;">
-                            <div class="card-body">
-                                <h4 class="card-title text-center">${event.title}</h4>
-                                <hr>
-                                <p class="card-text" style="min-height: 30px">
-                                    ${event.description}
-                                </p>
-                                <p class="card-text">
-                                    <b><i class="far fa-calendar-alt"></i> Artist:</b> ${event.artist}
-                                </p>
-                                <p class="card-text">
-                                    <b><i class="fa fa-user"></i> Price:</b>
-                                    ${event.price}
-                                </p>
 
-                                <p class="card-text">
-                                    <b><i class="fa fa-user"></i> Sales:</b>
-                                    ${event.salesAmount}
-                                </p>
+                        <form action="./BuySong" method="post">
+                            <div class="card"  style="width: 15rem; margin-bottom: 20px" >
+                                <img class="card-img-top img-fluid"
+                                     src="./img/music-sign.jpg"  alt=""
+                                     style="width: 30%;
+                                     margin: 0 auto;">
+                                <div class="card-body">
+
+                                    <input type="hidden" name="id" value="<c:out value='${event.id}' />" />
+                                    <h4 class="card-title text-center">${event.title}</h4>
+                                    <hr>
+                                    <p class="card-text" style="min-height: 30px">
+                                        ${event.description}
+                                    </p>
+                                    <p class="card-text">
+                                        <b><i class="far fa-calendar-alt"></i> Artist:</b> ${event.artist}
+                                    </p>
+                                    <p class="card-text">
+                                        <b><i class="fa fa-user"></i> Price:</b>
+                                        ${event.price}
+                                    </p>
+
+                                    <p class="card-text">
+                                        <b><i class="fa fa-user"></i> Sales:</b>
+                                        ${event.salesAmount}
+                                    </p>
+                                </div>
+                                <hr/>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="card-text"><strong>Quantity:</strong></p>
+                                        </div>
+                                        <div class="col-6" >
+
+                                            <input style="width:70%" type="text"value="0" name="quantity" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin:16px 0" class="col text-center">
+                                    <button style="width: 100px" type="submit" class="btn btn-warning">Buy</button>
+                                </div>
                             </div>
-                            <div class="col text-center">
-                                <a href="eventDetails?id=${event.id}" class="btn btn-warning" style="width:50%"><i
-                                        class="fas fa-external-link-alt"></i> Buy</a>
-                            </div>
-                            <br>
-                        </div>
+                        </form>
                     </div>
+
                 </c:forEach>
             </div>
         </div>

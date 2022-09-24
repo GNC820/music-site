@@ -24,7 +24,7 @@ public class SongDao {
             PreparedStatement pt = this.con.prepareStatement(query);
 
             ResultSet rs = checkTitle(song.getTitle());
-            System.out.println(!rs.isBeforeFirst());
+
             if (!rs.isBeforeFirst()) {
                 pt.setString(1, song.getTitle());
                 pt.setString(2, song.getArtist());
@@ -92,20 +92,21 @@ public class SongDao {
         return song;
     }
 
-    public boolean updateSong(User user) throws SQLException {
-        boolean rowUpdated;
-
-        String query = "update user set username = ?,email= ?, isAdmin = ? where id = ?;";
+    public int updateSongSales(int songId, int amount) throws SQLException {
+        int rowUpdated;
+        // get existing sale and update the amount
+        Song song = getSongById(songId);
+        Integer newAmount = song.getSalesAmount() +  amount;
+        
+        String query = "update song set salesAmount = ? where id = ?;";
         PreparedStatement preparedStatement;
-
+        
         preparedStatement = this.con.prepareStatement(query);
+         
+        preparedStatement.setInt(1, newAmount);
+        preparedStatement.setInt(2, songId);
 
-        preparedStatement.setString(1, user.getUsername());
-        preparedStatement.setString(2, user.getEmail());
-        preparedStatement.setString(3, user.getIsAdmin());
-        preparedStatement.setInt(4, user.getId());
-
-        rowUpdated = preparedStatement.executeUpdate() > 0;
+        rowUpdated = preparedStatement.executeUpdate();
 
         return rowUpdated;
     }
@@ -115,11 +116,10 @@ public class SongDao {
         List<Song> songs = new ArrayList<Song>();
         try {
             PreparedStatement preparedStatement = this.con.prepareStatement(query);
-            preparedStatement.setString(1,inputString);
+            preparedStatement.setString(1, inputString);
             preparedStatement.setString(2, inputString);
-        
+
             ResultSet rs = preparedStatement.executeQuery();
-            
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {

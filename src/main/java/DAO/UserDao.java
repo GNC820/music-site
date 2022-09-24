@@ -46,12 +46,13 @@ public class UserDao {
             ResultSet rst = pt.executeQuery();
 
             if (rst.next()) {
+                Integer user_id = rst.getInt("id");
                 username = rst.getString("username");
                 password = rst.getString("password");
                 String isAdmin = rst.getString("isAdmin");
                 String email = rst.getString("email");
 
-                user = new User(username, password, isAdmin, email);
+                user = new User(user_id,username, password, email, isAdmin);
 
             }
 
