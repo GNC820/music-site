@@ -13,6 +13,7 @@
                 <img class="avatar" src="img/music-sign.jpg">
                 <h1>
                    Login</h1>
+                 <!-- here the /LoginUser servet is called when the Login button  is pressed-->
                 <form action="./LoginUser" method="post">
                     <p>
                         Username</p>

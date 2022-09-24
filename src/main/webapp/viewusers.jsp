@@ -18,6 +18,7 @@
                     <a class="navbar-brand"  style="color: yellow">
                         HitTastic! - an online music site </a>
                     <ul class="navbar-nav mr-auto">
+                        <!-- here the /ViewAllUsers servet is called when the Users tab is pressed-->
                         <li class="nav-item active"> <a class="nav-link" href="./ViewAllUsers">Users</a> </li>
                     </ul>
                 </div>
@@ -53,6 +54,8 @@
                                 <td><c:out value="${user.username}" /></td>
                                 <td><c:out value="${user.email}" /></td>
                                 <td><c:out value="${user.isAdmin}" /></td>
+                                <!-- here the /EditUser servet is called when the Edit tab is pressed-->
+                                <!-- here the /DeleteUser servet is called when the Delete tab is pressed-->
                                 <td><a class="btn btn-warning"  href="./EditUser?id=<c:out value='${user.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a  class="btn btn-warning" 
                                                                  href="./DeleteUser?id=<c:out value='${user.id}' />">Delete</a></td>

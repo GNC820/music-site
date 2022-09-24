@@ -13,7 +13,9 @@
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: black"> <a class="navbar-brand" style="color: yellow"> HitTastic! - an online music site</a></button>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
+            <!-- here the /ViewAllSongs servlet is called when the Songs tab is pressed-->
             <li class="nav-item active"> <a class="nav-link" href="./ViewAllSongs">Songs</a> </li>
+            <!-- here the /OrderHistory servlet is called when the Order history tab is pressed-->
             <li class="nav-item active"> <a class="nav-link" href="./OrderHistory">Order history</a> </li>
         </ul>
         <div class="col-9">
@@ -39,7 +41,7 @@
             <div class="row">
                 <c:forEach var="event" items="${allSongs}">
                     <div class="col-4 col-sm-3">
-
+                         <!-- here the /BuySong servlet is called when the Buy button is pressed-->
                         <form action="./BuySong" method="post">
                             <div class="card"  style="width: 15rem; margin-bottom: 20px; margin-top: 20px; min-height:700px" >
                                 <img class="card-img-top img-fluid"

@@ -13,6 +13,7 @@
                 <img class="avatar" src="img/music-sign.jpg">
                 <h1>
                     Register Account</h1>
+                 <!-- here the /RegisterUser servlet is called when the Logout register button is pressed-->
                 <form action="./RegisterUser" method="post">
                     <p>
                         Username</p>

@@ -19,11 +19,13 @@
                     <a class="navbar-brand"  style="color: yellow">
                         HitTastic! - an online music site </a>
                     <ul class="navbar-nav mr-auto">
+                          <!-- here the /Logout ViewAllUsers is called when the Users tab is pressed-->
                         <li class="nav-item active"> <a class="nav-link" href="./ViewAllUsers">Users</a> </li>
                     </ul>
 
                 </div>
                 <i class="mdi mdi-logout" ></i>
+                <!-- here the /Logout servlet is called when the Logout button is pressed-->
                 <a  class="btn btn-warning" href="./Logout">Logout</a>
             </nav>
         </header>
@@ -31,6 +33,7 @@
         <div class="container col-md-5" >
             <div class="card" >
                 <div class="card-body">
+                    <!-- here the /UpdateUser servlet is called when the Save button is pressed-->
                     <form action="./UpdateUser" method="post">
 
                         <caption>

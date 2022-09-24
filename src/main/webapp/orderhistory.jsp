@@ -18,11 +18,14 @@
                     <a class="navbar-brand"  style="color: yellow">
                         HitTastic! - an online music site </a>
                     <ul class="navbar-nav mr-auto">
+                         <!-- here the /ViewAllSongs servlet is called when the Songs tab  is pressed-->
                         <li class="nav-item active"> <a class="nav-link" href="./ViewAllSongs">Songs</a> </li>
+                         <!-- here the /OrderHistory servlet is called when the Order history tab  is pressed-->
                         <li class="nav-item active"> <a class="nav-link" href="./OrderHistory">Order history</a> </li>
                     </ul>
                 </div>
                 <i class="mdi mdi-logout" ></i>
+                 <!-- here the /Logout servlet is called when the Logout button is pressed-->
                 <a  class="btn btn-warning" href="./Logout">Logout</a>
             </nav>
         </header>
