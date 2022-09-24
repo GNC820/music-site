@@ -28,7 +28,7 @@ public class ConnectionManager {
                 + "  PRIMARY KEY (`id`)\n"
                 + ") ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
 
-        String orderTable = "CREATE TABLE `order` (\n"
+        String orderTable = "CREATE TABLE  IF NOT EXISTS `order` (\n"
                 + "  `id` int NOT NULL AUTO_INCREMENT,\n"
                 + "  `userId` int DEFAULT NULL,\n"
                 + "  `songId` int DEFAULT NULL,\n"
