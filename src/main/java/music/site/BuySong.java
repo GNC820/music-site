@@ -4,6 +4,7 @@
  */
 package music.site;
 
+import DAO.OrderDao;
 import DAO.SongDao;
 import connection.ConnectionManager;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Order;
 
 public class BuySong extends HttpServlet {
 
@@ -23,6 +25,7 @@ public class BuySong extends HttpServlet {
         try {
             // retrieve data from the jsp page
             Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+            String price = request.getParameter("price").replaceAll("[^0-9]", "");;
             Integer song_id = Integer.parseInt(request.getParameter("id"));
 
             // get the current session where user is set and retrieve his id
@@ -34,8 +37,10 @@ public class BuySong extends HttpServlet {
             int rowsUpdated = songDao.updateSongSales(song_id, quantity);
 
             // add the current order to the order history
-            
-            
+            OrderDao orderDao = new OrderDao(ConnectionManager.getConnection());
+            Integer total = quantity * Integer.parseInt(price);
+            Order order =  new Order(song_id, userId, price, quantity, total);
+            orderDao.saveOrder(order);
             // re render the songs with the updated values
             response.sendRedirect(request.getContextPath() + "/ViewAllSongs");
         } catch (SQLException ex) {

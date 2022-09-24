@@ -7,20 +7,23 @@ public class Order {
     private Integer userId;
     private String price;
     private Integer quantity;
+    private Integer total;
 
-    public Order(Integer id, Integer songId, Integer userId, String price, Integer quantity) {
+    public Order(Integer id, Integer songId, Integer userId, String price, Integer quantity, Integer total) {
         this.id = id;
         this.songId = songId;
         this.userId = userId;
         this.price = price;
         this.quantity = quantity;
+        this.total = total;
     }
 
-    public Order(Integer songId, Integer userId, String price, Integer quantity) {
+    public Order(Integer songId, Integer userId, String price, Integer quantity, Integer total) {
         this.songId = songId;
         this.userId = userId;
         this.price = price;
         this.quantity = quantity;
+        this.total = total;
     }
 
     public Integer getId() {
@@ -63,9 +66,17 @@ public class Order {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" + "id=" + id + ", songId=" + songId + ", userId=" + userId + ", price=" + price + ", quantity=" + quantity + '}';
+    public Integer getTotal() {
+        return total;
     }
 
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "id=" + id + ", songId=" + songId + ", userId=" + userId + ", price=" + price + ", quantity=" + quantity + ", total=" + total + '}';
+    }
+    
 }

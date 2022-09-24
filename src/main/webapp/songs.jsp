@@ -58,6 +58,7 @@
                                         <b><i class="far fa-calendar-alt"></i> Artist:</b> ${event.artist}
                                     </p>
                                     <p class="card-text">
+                                        <input type="hidden" name="price" value="<c:out value='${event.price}' />" />
                                         <b><i class="fa fa-user"></i> Price:</b>
                                         ${event.price}
                                     </p>

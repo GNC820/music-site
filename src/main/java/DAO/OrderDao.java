@@ -19,7 +19,7 @@ public class OrderDao {
     public boolean saveOrder(Order order) {
         boolean set = false;
         try {
-            String query = "insert into order(songId, userId, price, quantity) values(?,?,?,?)";
+            String query = "insert into music.order(songId, userId, price, quantity, total) values(?,?,?,?,?)";
 
             PreparedStatement pt = this.con.prepareStatement(query);
 
@@ -27,6 +27,7 @@ public class OrderDao {
             pt.setInt(2, order.getUserId());
             pt.setString(3, order.getPrice());
             pt.setInt(4, order.getQuantity());
+            pt.setInt(5, order.getTotal());
             pt.executeUpdate();
             set = true;
 
@@ -37,7 +38,7 @@ public class OrderDao {
     }
 
     public List<Order> selectAllOrdersByUserId(Integer userId) {
-        String query = "select * from song where userId = ?";
+        String query = "SELECT * FROM music.order where userId = ? ;";
         List<Order> orders = new ArrayList<Order>();
         try {
             PreparedStatement preparedStatement = this.con.prepareStatement(query);
@@ -51,8 +52,8 @@ public class OrderDao {
                 Integer user_id = rs.getInt("userId");
                 String price = rs.getString("price");
                 Integer quantity = rs.getInt("quantity");
-
-                orders.add(new Order(id, song_id, user_id, price, quantity));
+                Integer total = rs.getInt("total");
+                orders.add(new Order(id, song_id, user_id, price, quantity, total));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
