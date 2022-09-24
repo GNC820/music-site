@@ -19,7 +19,7 @@
                     <a class="navbar-brand"  style="color: yellow">
                         HitTastic! - an online music site </a>
                     <ul class="navbar-nav mr-auto">
-                          <!-- here the /Logout ViewAllUsers is called when the Users tab is pressed-->
+                          <!-- here the /ViewAllUsers servet is called when the Users tab is pressed-->
                         <li class="nav-item active"> <a class="nav-link" href="./ViewAllUsers">Users</a> </li>
                     </ul>
 
