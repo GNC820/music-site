@@ -29,11 +29,9 @@ public class LoginUser extends HttpServlet {
 
             HttpSession session = null;
             session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("isAdmin", user.getIsAdmin());
-            session.setAttribute("userId", user.getId());
 
             if (user != null && user.getIsAdmin().equals("Yes")) {
+                session = request.getSession();
 
                 List<User> listUser = userDao.selectAllUsers();
                 request.setAttribute("listUser", listUser);
@@ -41,6 +39,9 @@ public class LoginUser extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
                 dispatcher.forward(request, response);
             } else if (user != null && user.getIsAdmin().equals("No")) {
+                session.setAttribute("username", username);
+                session.setAttribute("isAdmin", user.getIsAdmin());
+                session.setAttribute("userId", user.getId());
                 SongDao songDao = new SongDao(ConnectionManager.getConnection());
 
                 List<Song> songs = new ArrayList<Song>() {
