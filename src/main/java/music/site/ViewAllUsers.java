@@ -16,11 +16,16 @@ public class ViewAllUsers extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // create userDao instance
         UserDao userDao = new UserDao(ConnectionManager.getConnection());
         
+        // get all users from the DB
         List<User> listUser = userDao.selectAllUsers();
+        // add the users to the viewusers.jsp page
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
+        // redirect to the viewusers page
         dispatcher.forward(request, response);
 
     }

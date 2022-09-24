@@ -18,16 +18,23 @@ public class DeleteUser extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // retrieve data from the jsp page
         int id = Integer.parseInt(request.getParameter("id"));
+
+        // create the userDao object
         UserDao userDao = new UserDao(ConnectionManager.getConnection());
 
         try {
+            // delete the user
             boolean rowDeleted = userDao.deleteUser(id);
+            
             if (rowDeleted) {
+                // if user is deleted get the updated users list
                 List<User> listUser = userDao.selectAllUsers();
                 request.setAttribute("listUser", listUser);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
-//                dispatcher.forward(request, response);
+
+                // re render the updated users list
                 response.sendRedirect(request.getContextPath() + "/ViewAllUsers");
             }
         } catch (SQLException ex) {

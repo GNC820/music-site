@@ -15,12 +15,18 @@ public class SearchSong extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // retrieve the data from the jsp page
         String inputString = request.getParameter("search");
+        
+        // create songDao instance
         SongDao songDao = new SongDao(ConnectionManager.getConnection());
-
+        
+        // get songs list
         List<Song> songs = songDao.search(inputString);
+        
+        // redirect to the songs page
         RequestDispatcher dispatcher = request.getRequestDispatcher("songs.jsp");
+        // add the songs list to the songs.jsp view
         request.setAttribute("allSongs", songs);
         dispatcher.forward(request, response);
 

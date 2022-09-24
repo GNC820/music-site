@@ -16,11 +16,16 @@ public class ViewAllSongs extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        // create the songDao instance
         SongDao songDao = new SongDao(ConnectionManager.getConnection());
+        
+        // get all songs from the database
         List<Song> allSongs = songDao.selectAllSongs();
-
+        
+        // redirect the user with the songs page
         RequestDispatcher dispatcher = request.getRequestDispatcher("songs.jsp");
+        // add the songs to the songs.jsp page
         request.setAttribute("allSongs", allSongs);
         dispatcher.forward(request, response);
 

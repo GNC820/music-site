@@ -16,12 +16,16 @@ public class EditUser extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // retrieve the data from the jsp page
         String id = request.getParameter("id");
+
+        // get useDao instance
         UserDao userDao = new UserDao(ConnectionManager.getConnection());
 
+        // get current user by his id
         User user = userDao.getUserById(Integer.parseInt(id));
 
+        // sent the user to the user edit page
         RequestDispatcher dispatcher = request.getRequestDispatcher("editUser.jsp");
         request.setAttribute("user", user);
         dispatcher.forward(request, response);

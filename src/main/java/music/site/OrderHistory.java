@@ -20,13 +20,19 @@ public class OrderHistory extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // get current session
         HttpSession session = request.getSession(true);
+        // get current user id from the session
         Integer userId = (Integer) session.getAttribute("userId");
 
+        // create orderDao instance
         OrderDao orderDao = new OrderDao(ConnectionManager.getConnection());
+        // get all orders by user id
         List<Order> allOrders = orderDao.selectAllOrdersByUserId(userId);
-
+        
+        //redirect to order history page
         RequestDispatcher dispatcher = request.getRequestDispatcher("orderhistory.jsp");
+        // add orders to the orderhistory page
         request.setAttribute("allOrders", allOrders);
         dispatcher.forward(request, response);
     }

@@ -21,29 +21,46 @@ public class LoginUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // retrieve the data from the jsp page
             String username = request.getParameter("username");
             String password = PasswordHashing.encrypt(request.getParameter("password"), "Test");
 
+            // get the userDao instance
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
+
+            // login user with his credentials
             User user = userDao.login(username, password);
 
+            // create HTTP session
             HttpSession session = null;
             session = request.getSession();
 
+            // if user exists and is admin
             if (user != null && user.getIsAdmin().equals("Yes")) {
-                session = request.getSession();
-
-                List<User> listUser = userDao.selectAllUsers();
-                request.setAttribute("listUser", listUser);
-
-                RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
-                dispatcher.forward(request, response);
-            } else if (user != null && user.getIsAdmin().equals("No")) {
+                // set sesstion values
                 session.setAttribute("username", username);
                 session.setAttribute("isAdmin", user.getIsAdmin());
                 session.setAttribute("userId", user.getId());
-                SongDao songDao = new SongDao(ConnectionManager.getConnection());
 
+                // get the list of the user
+                List<User> listUser = userDao.selectAllUsers();
+                request.setAttribute("listUser", listUser);
+
+                // add the list to the viewuser page and redirect to that page
+                RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");
+                dispatcher.forward(request, response);
+
+                // if user exists and is not admin
+            } else if (user != null && user.getIsAdmin().equals("No")) {
+                  // set sesstion values
+                session.setAttribute("username", username);
+                session.setAttribute("isAdmin", user.getIsAdmin());
+                session.setAttribute("userId", user.getId());
+                
+                // create the songDao instance
+                SongDao songDao = new SongDao(ConnectionManager.getConnection());
+                
+                // pre-populate the song table if no songs are available
                 List<Song> songs = new ArrayList<Song>() {
                     {
                         add(new Song("Out of Time", "The Weeknd", "£22 ", "A respite from the fast-paced front half of the Weeknd’s Dawn FM, “Out of Time” slows things down and looks inward, inspired by Japanese city pop from the early Eighties and sampling Tomoko Aran’s “Midnight Pretenders.”", 0));
@@ -56,13 +73,17 @@ public class LoginUser extends HttpServlet {
                         add(new Song("Cursed", "King Princess", "£33", "With lines like “Did you stop smoking weed/Or trying to please your dad?” the latest King Princess single is a cheeky pop gem — the kind that can shine long after you’ve exhausted your “play” button.Dog for one messy web of Nineties.", 0));
                     }
                 };
+                // persist each song into the database
                 for (Song song : songs) {
                     songDao.saveSong(song);
                 }
-
+                
+                // retrivere all the songs
                 List<Song> allSongs = songDao.selectAllSongs();
-
+                
+                // redierect the user to the songs page
                 RequestDispatcher dispatcher = request.getRequestDispatcher("songs.jsp");
+                // add songs data to the songs.jsp page
                 request.setAttribute("allSongs", allSongs);
                 dispatcher.forward(request, response);
             } else {

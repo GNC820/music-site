@@ -23,7 +23,7 @@ public class BuySong extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // retrieve data from the jsp page
+            // retrieve the data from the jsp page
             Integer quantity = Integer.parseInt(request.getParameter("quantity"));
             String price = request.getParameter("price").replaceAll("[^0-9]", "");;
             Integer song_id = Integer.parseInt(request.getParameter("id"));
@@ -36,11 +36,12 @@ public class BuySong extends HttpServlet {
             SongDao songDao = new SongDao(ConnectionManager.getConnection());
             int rowsUpdated = songDao.updateSongSales(song_id, quantity);
 
-            // add the current order to the order history
+            // add the current order to the order history 
             OrderDao orderDao = new OrderDao(ConnectionManager.getConnection());
             Integer total = quantity * Integer.parseInt(price);
             Order order =  new Order(song_id, userId, price, quantity, total);
             orderDao.saveOrder(order);
+            
             // re render the songs with the updated values
             response.sendRedirect(request.getContextPath() + "/ViewAllSongs");
         } catch (SQLException ex) {

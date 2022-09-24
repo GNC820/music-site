@@ -11,9 +11,14 @@ public class ConnectionManager {
     public static Connection getConnection() {
 
         try {
+            // get the mysql class  driver
             Class.forName("com.mysql.cj.jdbc.Driver");
+            // create database if not exists
             createDatabase();
+            // get the database connection
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/music", "root", "admin");
+
+            // get tables if not exists
             createTables(con);
 
         } catch (Exception e) {
@@ -25,9 +30,11 @@ public class ConnectionManager {
     private static void createDatabase() {
         Statement st;
         try {
+            // create a connection without a database
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "admin");
 
             st = con.createStatement();
+            // create the music database
             st.executeUpdate("CREATE DATABASE IF NOT EXISTS music");
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -38,6 +45,7 @@ public class ConnectionManager {
 
         try {
             Statement st = connection.createStatement();
+            // create a table based on sql
             st.execute(table);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,6 +53,7 @@ public class ConnectionManager {
     }
 
     private static void createTables(Connection con) {
+        // sql string for user table
         String userTable = "CREATE TABLE IF NOT EXISTS `user` (\n"
                 + "  `id` int NOT NULL AUTO_INCREMENT,\n"
                 + "  `username` varchar(45) DEFAULT NULL,\n"
@@ -53,7 +62,7 @@ public class ConnectionManager {
                 + "  `email` varchar(45) DEFAULT NULL,\n"
                 + "  PRIMARY KEY (`id`)\n"
                 + ") ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
-
+        // sql string for song table
         String songTable = "CREATE TABLE IF NOT EXISTS `song` (\n"
                 + "  `id` int NOT NULL AUTO_INCREMENT,\n"
                 + "  `title` varchar(45) DEFAULT NULL,\n"
@@ -63,7 +72,7 @@ public class ConnectionManager {
                 + "  `salesAmount` int DEFAULT NULL,\n"
                 + "  PRIMARY KEY (`id`)\n"
                 + ") ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
-
+       // sql string for order table
         String orderTable = "CREATE TABLE  IF NOT EXISTS `order` (\n"
                 + "  `id` int NOT NULL AUTO_INCREMENT,\n"
                 + "  `userId` int DEFAULT NULL,\n"
@@ -77,6 +86,7 @@ public class ConnectionManager {
                 + "  CONSTRAINT `songId` FOREIGN KEY (`songId`) REFERENCES `song` (`id`) ON DELETE CASCADE,\n"
                 + "  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE\n"
                 + ") ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+        // persist the tables into databases
         createTable(userTable, con);
         createTable(songTable, con);
         createTable(orderTable, con);

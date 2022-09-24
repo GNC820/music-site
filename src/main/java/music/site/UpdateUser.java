@@ -24,18 +24,24 @@ public class UpdateUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // retrieve the data from the jsp page
             Integer id = Integer.parseInt(request.getParameter("id"));
             String username = request.getParameter("username");
             String isAdmin = request.getParameter("isAdmin");
             String email = request.getParameter("email");
 
+            // create user instance
             User user = new User(id, username, email, isAdmin);
 
+            // create userDao instance
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
-
+            
+            // get the result of the updateUser function
             boolean isRowUpdated = userDao.updateUser(user);
-
+            
+            // if user was succesfully updated
             if (isRowUpdated) {
+                // re render the user list with the updated user
                 List<User> listUser = userDao.selectAllUsers();
                 request.setAttribute("listUser", listUser);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("viewusers.jsp");

@@ -16,21 +16,26 @@ public class RegisterUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // retrieve the data from the jsp page
             String username = request.getParameter("username");
             String password = PasswordHashing.encrypt(request.getParameter("password"), "Test");
             String isAdmin = request.getParameter("isAdmin");
             String email = request.getParameter("email");
 
+            //create user instance
             User user = new User(username, password, isAdmin, email);
 
             boolean status = false;
+            // create userDao instance
             UserDao userDao = new UserDao(ConnectionManager.getConnection());
             status = userDao.saveUser(user);
 
+            // if user was registered redirect him to the login page
             if (status) {
                 // Step: Redirect to a View
                 RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
+                // otherwise re render the register page
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
                 dispatcher.forward(request, response);
