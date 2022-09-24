@@ -23,7 +23,7 @@ public class OrderDao {
 
             PreparedStatement pt = this.con.prepareStatement(query);
 
-            // set the ? parameters with the current order value
+            // set the ? parameters with the current order values
             pt.setInt(1, order.getSongId());
             pt.setInt(2, order.getUserId());
             pt.setString(3, order.getPrice());

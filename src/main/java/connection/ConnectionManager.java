@@ -9,6 +9,42 @@ public class ConnectionManager {
     private static Connection con;
 
     public static Connection getConnection() {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            createDatabase();
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/music", "root", "admin");
+            createTables(con);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return con;
+    }
+
+    private static void createDatabase() {
+        Statement st;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "admin");
+
+            st = con.createStatement();
+            st.executeUpdate("CREATE DATABASE IF NOT EXISTS music");
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private static void createTable(String table, Connection connection) {
+
+        try {
+            Statement st = connection.createStatement();
+            st.execute(table);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createTables(Connection con) {
         String userTable = "CREATE TABLE IF NOT EXISTS `user` (\n"
                 + "  `id` int NOT NULL AUTO_INCREMENT,\n"
                 + "  `username` varchar(45) DEFAULT NULL,\n"
@@ -41,38 +77,8 @@ public class ConnectionManager {
                 + "  CONSTRAINT `songId` FOREIGN KEY (`songId`) REFERENCES `song` (`id`) ON DELETE CASCADE,\n"
                 + "  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE\n"
                 + ") ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            createDatabase();
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/music", "root", "admin");
-            createTable(userTable, con);
-            createTable(songTable, con);
-            createTable(orderTable, con);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return con;
-    }
-
-    private static void createDatabase() {
-        Statement st;
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "admin");
-
-            st = con.createStatement();
-            st.executeUpdate("CREATE DATABASE IF NOT EXISTS music");
-        } catch (SQLException ex) {
-            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private static void createTable(String table, Connection connection) {
-
-        try {
-            Statement st = connection.createStatement();
-            st.execute(table);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        createTable(userTable, con);
+        createTable(songTable, con);
+        createTable(orderTable, con);
     }
 }

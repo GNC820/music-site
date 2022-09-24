@@ -41,7 +41,7 @@
                     <div class="col-4 col-sm-3">
 
                         <form action="./BuySong" method="post">
-                            <div class="card"  style="width: 15rem; margin-bottom: 20px" >
+                            <div class="card"  style="width: 15rem; margin-bottom: 20px; margin-top: 20px; min-height:700px" >
                                 <img class="card-img-top img-fluid"
                                      src="./img/music-sign.jpg"  alt=""
                                      style="width: 30%;
