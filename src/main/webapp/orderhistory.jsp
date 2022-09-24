@@ -30,7 +30,7 @@
 
         <div class="row">
             <div class="container">
-                <h3 class="text-center">List of Users</h3>
+                <h3 class="text-center">Order history</h3>
                 <hr>
                 <br>
                 <table class="table table-bordered">

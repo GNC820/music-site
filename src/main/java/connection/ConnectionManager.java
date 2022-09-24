@@ -28,7 +28,7 @@ public class ConnectionManager {
                 + "  PRIMARY KEY (`id`)\n"
                 + ") ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
 
-        String orderTable = "CREATE TABLE IF NOT EXISTS `order` (\n"
+        String orderTable = "CREATE TABLE `order` (\n"
                 + "  `id` int NOT NULL AUTO_INCREMENT,\n"
                 + "  `userId` int DEFAULT NULL,\n"
                 + "  `songId` int DEFAULT NULL,\n"
@@ -38,9 +38,9 @@ public class ConnectionManager {
                 + "  PRIMARY KEY (`id`),\n"
                 + "  KEY `userId_idx` (`userId`),\n"
                 + "  KEY `songId_idx` (`songId`),\n"
-                + "  CONSTRAINT `songId` FOREIGN KEY (`songId`) REFERENCES `song` (`id`),\n"
-                + "  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)\n"
-                + ") ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+                + "  CONSTRAINT `songId` FOREIGN KEY (`songId`) REFERENCES `song` (`id`) ON DELETE CASCADE,\n"
+                + "  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE\n"
+                + ") ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             createDatabase();
